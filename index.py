@@ -15,7 +15,7 @@ app = application.app
 server = application.server
 header = Header()
 
-
+#patate
 #layout rendu par l'application
 app.layout = html.Div([
     dcc.Location(id='url', refresh=True),
