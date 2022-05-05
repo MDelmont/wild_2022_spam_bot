@@ -10,4 +10,8 @@ class Detection_des_spams():
         self.app = app
     
     def get_layout(self):
-        return None
+        layout = html.Div([
+                        dcc.Dropdown(['Scikit Learn', 'Tensor Flow'], 
+                        placeholder="Select a module")
+                        ])
+        return layout
