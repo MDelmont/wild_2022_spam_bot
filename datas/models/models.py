@@ -20,7 +20,9 @@ class Models():
         if librairie == 'Tensorflow':
             result = round(model.predict(vec_model.transform([text]).toarray())[0][0])
         else:
-            result = round(model.predict(vec_model.transform([text]).toarray())[0][0])
+         
+            result = model.predict(vec_model.transform([text]))
+       
 
         return 'spam' if result == 0 else 'ham'
 
