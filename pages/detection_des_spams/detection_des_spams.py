@@ -47,7 +47,7 @@ class Detection_des_spams():
 
                     html.Div(id='Div_result_ham_spam',
                     children=[
-                            html.H1(children='ham', id='result_ham_spam'),
+                            html.H1(children=['ham'], id='result_ham_spam'),
 
                             html.Img(id='image-spam-ham',src=self.data.get_image_ham_spam('ham'),style={'height':'150px', 'width':'150px'})     
                     ], style = {'textAlign' : 'center', 'display' : 'none'})

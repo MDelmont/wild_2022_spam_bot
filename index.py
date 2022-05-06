@@ -104,6 +104,41 @@ def update_model_choice(n_clicks,librairies_choice,model_choice,sms_text):
 
     except Exception as error:
         return f"ERROR : {error}"
- 
+
+@app.callback(Output('ts_MLP', 'style'),
+            Output('sk_MLP', 'style'),
+            Input('librairies_choice', 'value'),
+            Input('model_choice', 'value'),
+          )
+def display_div_parameters(librairies_choice, model_choice):
+    if librairies_choice == 'Scikit Learn':
+        if model_choice == "MLP":
+            return {'display':"none", 'width': '80%', 'textAlign': 'center', 'padding-left': '10%'}, {'display': "block", 'width': '80%', 'textAlign': 'center', 'padding-left': '10%'}
+        else:
+            return {'display':"none", 'width': '80%', 'textAlign': 'center', 'padding-left': '10%'}, {'display': "none", 'width': '80%', 'textAlign': 'center', 'padding-left': '10%'}
+    else:
+        return {'display': "block", 'width': '80%', 'textAlign': 'center', 'padding-left': '10%'}, {'display': "none", 'width': '80%', 'textAlign': 'center', 'padding-left': '10%'}
+
+
+@app.callback(Output('accuracy', 'children'),
+            Output('recall', 'children'),
+            Output('f1_score', 'children'),
+            Output('graph_conf_mat', 'fig'),
+            Input('librairies_choice', 'value'),
+            Input('model_choice', 'value'),
+            Input('ts_MLP_activation', 'value'),
+            Input('ts_MLP_neurones', 'value'),
+            Input('ts_MLP_couches', 'value'),
+            Input('ts_MLP_solveur', 'value'),
+            Input('sk_MLP_activation', 'value'),
+            Input('sk_MLP_solveur', 'value'),
+             )
+def graph_metrics(librairies_choice, model_choice, ts_MLP_activation, ts_MLP_neurones, ts_MLP_couches, ts_MLP_solveur, sk_MLP_activation, sk_MLP_solveur):
+    if librairies_choice == "Scikit Learn":
+        return models.get_model_metrics(librairie=librairies_choice, model_name=model_choice, activation=sk_MLP_activation, solver=sk_MLP_solveur)
+    else:
+        return models.get_model_metrics(librairie=librairies_choice, model_name=model_choice, activation=ts_MLP_activation, neurons_nb=ts_MLP_neurones,
+                                        layer=ts_MLP_couches, solver=ts_MLP_solveur)
+
 if __name__ == '__main__':
     app.run_server(debug=True)

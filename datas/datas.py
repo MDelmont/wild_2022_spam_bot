@@ -15,7 +15,7 @@ class Datas():
         return None
     def get_dataframe(self):
 
-        return pd.read_csv(f'{self.conf.path_file_dataframe}email-icon.jpg')
+        return pd.read_csv(f'{self.conf.path_file_dataframe}new_sms_clean.csv')
 
     def get_image_ham_spam(self,type):
         path=f'{self.conf.path_file_image}email-icon.jpg'
