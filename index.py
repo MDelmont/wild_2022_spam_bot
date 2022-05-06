@@ -88,8 +88,8 @@ def update_model_choice(value_lib,value_model):
             Input('librairies_choice', 'value'),
             Input('model_choice', 'value'),
             Input('sms_text','value'),
-            Input('image-spam-ham', 'src'),)
-def update_model_choice(n_clicks,librairies_choice,model_choice,sms_text,src):
+          )
+def update_model_choice(n_clicks,librairies_choice,model_choice,sms_text):
 
     try:
         if n_clicks  and sms_text and app.n_click_button < n_clicks:
@@ -100,7 +100,7 @@ def update_model_choice(n_clicks,librairies_choice,model_choice,sms_text,src):
  
             return responce , data.get_image_ham_spam(responce),{'textAlign' : 'center', 'display' : 'block'}
         else:
-            return '',src,{'textAlign' : 'center', 'display' : 'none'}
+            return '', data.get_image_ham_spam('ham'),{'textAlign' : 'center', 'display' : 'none'}
 
     except Exception as error:
         return f"ERROR : {error}"
